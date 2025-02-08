@@ -1,4 +1,7 @@
 /* General Reset */
+a {
+    text-decoration: none;
+}
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +14,7 @@
     width: 100%;
     min-height: 100vh;
     background: linear-gradient(to bottom, rgba(34, 139, 34, 0.6), rgba(0, 0, 0, 0.7)),
-        url("/public/images/pacman.png") no-repeat center center/cover;
+        url("/public/images/pacman.jpg") no-repeat center center/cover;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,6 +47,10 @@
 .hero-content {
     max-width: 600px;
     animation: slideUp 1.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
 }
 
 @keyframes slideUp {
@@ -66,146 +73,94 @@
     color: white; /* Explicitly set to white */
 }
 
-/* Button Styling */
-.btn-17,
-.btn-17 *,
-.btn-17 :after,
-.btn-17 :before,
-.btn-17:after,
-.btn-17:before {
-  border: 0 solid;
-  box-sizing: border-box;
-}
-
-.btn-17 {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: button;
-  background-color: #0d350d99;
-  background-image: none;
-  color: #fff;
+/* New Animated Button Styles */
+.animated-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 36px;
+  border: 4px solid;
+  border-color: transparent;
+  font-size: 16px;
+  background-color: inherit;
+  border-radius: 100px;
+  font-weight: 600;
+  color: greenyellow;
+  box-shadow: 0 0 0 2px greenyellow;
   cursor: pointer;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  font-size: 100%;
-  font-weight: 900;
-  line-height: 1.5;
-  margin: 0;
-  -webkit-mask-image: -webkit-radial-gradient(#228b2299, #fff);
-  padding: 0;
-  text-transform: uppercase;
-}
-
-.btn-17:disabled {
-  cursor: default;
-}
-
-.btn-17:-moz-focusring {
-  outline: auto;
-}
-
-.btn-17 svg {
-  display: block;
-  vertical-align: middle;
-}
-
-.btn-17 [hidden] {
-  display: none;
-}
-
-.btn-17 {
-  border-radius: 99rem;
-  border-width: 2px;
-  padding: 0.8rem 3rem;
-  z-index: 0;
-}
-
-.btn-17,
-.btn-17 .text-container {
   overflow: hidden;
-  position: relative;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  margin-top: 20px; /* Add some space above the button */
 }
 
-.btn-17 .text-container {
-  display: block;
-  mix-blend-mode: difference;
-}
-
-.btn-17 .text {
-  display: block;
-  position: relative;
-}
-
-.btn-17:hover .text {
-  -webkit-animation: move-up-alternate 0.3s forwards;
-  animation: move-up-alternate 0.3s forwards;
-}
-
-@-webkit-keyframes move-up-alternate {
-  0% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(80%);
-  }
-
-  51% {
-    transform: translateY(-80%);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-@keyframes move-up-alternate {
-  0% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(80%);
-  }
-
-  51% {
-    transform: translateY(-80%);
-  }
-
-  to {
-    transform: translateY(0);
-  }
-}
-
-.btn-17:after,
-.btn-17:before {
-  --skew: 0.2;
-  background: #fff;
-  content: "";
-  display: block;
-  height: 102%;
-  left: calc(-50% - 50% * var(--skew));
-  pointer-events: none;
+.animated-button svg {
   position: absolute;
-  top: -104%;
-  transform: skew(calc(150deg * var(--skew))) translateY(var(--progress, 0));
-  transition: transform 0.2s ease;
-  width: 100%;
+  width: 24px;
+  fill: greenyellow;
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.btn-17:after {
-  --progress: 0%;
-  left: calc(50% + 50% * var(--skew));
-  top: 102%;
-  z-index: -1;
+.animated-button .arr-1 {
+  right: 16px;
 }
 
-.btn-17:hover:before {
-  --progress: 100%;
+.animated-button .arr-2 {
+  left: -25%;
 }
 
-.btn-17:hover:after {
-  --progress: -102%;
+.animated-button .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: greenyellow;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button:hover {
+  box-shadow: 0 0 0 12px transparent;
+  color: #212121;
+  border-radius: 12px;
+}
+
+.animated-button:hover .arr-1 {
+  right: -25%;
+}
+
+.animated-button:hover .arr-2 {
+  left: 16px;
+}
+
+.animated-button:hover .text {
+  transform: translateX(12px);
+}
+
+.animated-button:hover svg {
+  fill: #212121;
+}
+
+.animated-button:active {
+  scale: 0.95;
+  box-shadow: 0 0 0 4px greenyellow;
+}
+
+.animated-button:hover .circle {
+  width: 220px;
+  height: 220px;
+  opacity: 1;
 }
 
 /* Features Section */

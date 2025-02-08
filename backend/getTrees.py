@@ -1,5 +1,8 @@
 import requests
 from collections import Counter
+import numpy as np
+import json
+
 
 def get_common_plants(latitude, longitude, delta=0.01, limit=300):
     """
@@ -40,7 +43,6 @@ def get_common_plants(latitude, longitude, delta=0.01, limit=300):
     occurrences = data.get("results", [])
     
     if not occurrences:
-        print("No occurrence records found for this area.")
         return None
     
     species_counter = Counter()
@@ -58,19 +60,29 @@ def get_common_plants(latitude, longitude, delta=0.01, limit=300):
 def main():
     print("Enter coordinates to find the most common plants in the area using GBIF data.")
     try:
-        latitude = float(input("Enter latitude: ").strip())
-        longitude = float(input("Enter longitude: ").strip())
+        latitude =  40.78#5#091 #float(input("Enter latitude: ").strip())
+        longitude = -73.96#8#285 # float(input("Enter longitude: ").strip())
     except ValueError:
         print("Invalid input. Please enter numeric values for coordinates.")
         return
-    
-    results = get_common_plants(latitude, longitude)
-    if not results:
-        return
-    
-    print("\nMost common plant species in the area:")
-    for species, count in results:
-        print(f"{species}: {count} occurrence{'s' if count > 1 else ''}")
+    lat_start = 19
+    lat_end = 71.5
+    long_start = -179
+    long_end = -67
+    all_res = list()
+    for i in np.arange(19, 71.5, 0.5):
+        for j in np.arange(-179, -67, 0.5):
+            cur_res = get_common_plants(i, j)
+            if cur_res:
+                toAppend = [latitude, longitude, cur_res]
+                all_res.append(toAppend)
+            if j% 5 == 0:
+                print(j)
+        print(i)
+    json_string = json.dumps(all_res, indent=4)
+    with open('output.json', 'w') as json_file:
+        json_file.write(json_string)
+
 
 if __name__ == '__main__':
     main()

@@ -60,21 +60,17 @@ def get_common_plants(latitude, longitude, delta=0.01, limit=300):
 def main():
     print("Enter coordinates to find the most common plants in the area using GBIF data.")
     try:
-        latitude =  40.78#5#091 #float(input("Enter latitude: ").strip())
-        longitude = -73.96#8#285 # float(input("Enter longitude: ").strip())
+        latitude =  40.78
+        longitude = -73.96
     except ValueError:
         print("Invalid input. Please enter numeric values for coordinates.")
         return
-    lat_start = 19
-    lat_end = 71.5
-    long_start = -179
-    long_end = -67
     all_res = list()
-    for i in np.arange(19, 71.5, 0.5):
-        for j in np.arange(-179, -67, 0.5):
+    for i in np.arange(24, 50, 0.5):
+        for j in np.arange(-125, -67, 0.5):
             cur_res = get_common_plants(i, j)
             if cur_res:
-                toAppend = [latitude, longitude, cur_res]
+                toAppend = [i, j, cur_res]
                 all_res.append(toAppend)
             if j% 5 == 0:
                 print(j)

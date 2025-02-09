@@ -17,25 +17,27 @@
     justify-content: center;
     color: white;
     padding: 40px;
+    text-align: center;
 }
 
 /* Title */
 h1 {
+    color: white !important; /* Force white text */
     font-size: 2.5rem;
-    text-align: center;
     margin-bottom: 20px;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
-    color: white;
+    opacity: 1; /* Ensure full visibility */
 }
 
 /* Search Section */
 .search-section {
     display: flex;
-    gap: 12px;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 12px;
     width: 100%;
-    max-width: 600px;  /* Increased width */
+    max-width: 400px;
 }
 
 /* Input Field */
@@ -47,6 +49,7 @@ input {
     border-radius: 12px;
     outline: none;
     transition: all 0.3s ease-in-out;
+    text-align: center;
 }
 
 input:focus {
@@ -55,112 +58,70 @@ input:focus {
     color: white;
 }
 
-/* Button with Modern Hover Effect */
-a {
-    position: relative;
-    display: inline-block;
+/* Search Button */
+button.dashboard-search-button {
     padding: 15px 30px;
     border: 2px solid #fefefe;
     text-transform: uppercase;
     color: #fefefe;
-    text-decoration: none;
     font-weight: 600;
     font-size: 20px;
-  }
+    background: black;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
 
-  a::before {
-    content: '';
-    position: absolute;
-    top: 6px;
-    left: -2px;
-    width: calc(100% + 4px);
-    height: calc(100% - 12px);
-    background-color: #212121;
-    transition: 0.3s ease-in-out;
-    transform: scaleY(1);
-  }
-  
-  a:hover::before {
-    transform: scaleY(0);
-  }
-
-  a::after {
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: -2px;
-    height: calc(100% + 4px);
-    width: calc(100% - 12px);
-    background-color: #212121;
-    transition: 0.3s ease-in-out;
-    transform: scaleX(1);
-    transition-delay: 0.5s;
-  }
-  
-  a:hover::after {
-    transform: scaleX(0);
-  }
-  
-  a span {
-    position: relative;
-    z-index: 3;
-  }
-  
-  button {
-    background-color: none;
-    text-decoration: none;
-    background-color: #212121;
-    border: none;
-  }
+button.dashboard-search-button:hover {
+    background: white;
+    color: black;
+}
 
 /* Results Section */
 .results-section {
-    margin-top: 30px;
     width: 100%;
-    max-width: 700px;
+    max-width: 500px;
+    margin-top: 30px;
     text-align: center;
 }
 
-/* No Results Message */
-.no-results {
-    font-size: 1.2rem;
-    opacity: 0.8;
-    color: white;
+/* Recommended Plants & Climate Factors Title */
+.results-section h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
 }
 
-/* Plant List */
-.plant-list {
+/* List Container */
+.plant-list, .climate-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
 }
 
-/* Plant Card */
-.plant-card {
-    background: rgba(255, 255, 255, 0.15);
+/* Cards for Plants & Climate Data */
+.data-card {
+    width: 100%;
     padding: 15px;
     border-radius: 12px;
-    text-align: left;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
     transition: all 0.3s ease-in-out;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.plant-card:hover {
+.data-card:hover {
     background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-5px);
 }
 
-/* Plant Name */
-.plant-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-}
-
-/* Plant Description */
-.plant-card p {
-    font-size: 1rem;
-    opacity: 0.9;
+/* Error Message */
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 /* Responsive Design */
@@ -170,20 +131,14 @@ a {
     }
 
     .search-section {
-        flex-direction: column;
-        max-width: 100%;
-    }
-
-    input {
         width: 90%;
-    }
-
-    a {
-        width: 90%;
-        text-align: center;
     }
 
     .results-section {
         max-width: 90%;
     }
+}
+
+.explanation-text {
+    color: white;
 }

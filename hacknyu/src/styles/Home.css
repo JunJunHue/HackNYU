@@ -74,7 +74,7 @@ a {
 }
 
 /* New Animated Button Styles */
-.animated-button {
+.home-button {
   position: relative;
   display: flex;
   align-items: center;
@@ -94,7 +94,7 @@ a {
   margin-top: 20px; /* Add some space above the button */
 }
 
-.animated-button svg {
+.home-button svg {
   position: absolute;
   width: 24px;
   fill: greenyellow;
@@ -102,15 +102,15 @@ a {
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.animated-button .arr-1 {
+.home-button .arr-1 {
   right: 16px;
 }
 
-.animated-button .arr-2 {
+.home-button .arr-2 {
   left: -25%;
 }
 
-.animated-button .circle {
+.home-button .circle {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -123,41 +123,41 @@ a {
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.animated-button .text {
+.home-button .text {
   position: relative;
   z-index: 1;
   transform: translateX(-12px);
   transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.animated-button:hover {
+.home-button:hover {
   box-shadow: 0 0 0 12px transparent;
   color: #212121;
   border-radius: 12px;
 }
 
-.animated-button:hover .arr-1 {
+.home-button:hover .arr-1 {
   right: -25%;
 }
 
-.animated-button:hover .arr-2 {
+.home-button:hover .arr-2 {
   left: 16px;
 }
 
-.animated-button:hover .text {
+.home-button:hover .text {
   transform: translateX(12px);
 }
 
-.animated-button:hover svg {
+.home-button:hover svg {
   fill: #212121;
 }
 
-.animated-button:active {
+.home-button:active {
   scale: 0.95;
   box-shadow: 0 0 0 4px greenyellow;
 }
 
-.animated-button:hover .circle {
+.home-button:hover .circle {
   width: 220px;
   height: 220px;
   opacity: 1;

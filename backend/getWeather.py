@@ -35,7 +35,7 @@ if __name__ == "__main__":
     # Define your point location and date range (format: YYYYMM)
     latitude = 36.83
     longitude = -86.78
-    start_date = "20250101"  # January 2023 in YYYYMM format
+    start_date = "20250101"  # January 2025 in YYYYMMDD format
     end_date = "20250101"    # For a single month of data
     with open("output.json", 'r') as file:
         data = json.load(file)
@@ -60,19 +60,3 @@ if __name__ == "__main__":
     json_string = json.dumps(output_data, indent=4)
     with open('weatherOutput.json', 'w') as json_file:
         json_file.write(json_string)
-    # data = get_nasa_power_monthly_data(latitude, longitude, start_date, end_date)
-    
-    # if data:
-    #     # Optionally, print the full JSON response
-    #     print("\nFull JSON response:")
-    #     print(data)
-        
-    #     # Extract and display each parameter's data by month
-    #     try:
-    #         parameters_data = data["properties"]["parameter"]
-    #         for param, values in parameters_data.items():
-    #             print(f"\nParameter: {param}")
-    #             for date, value in sorted(values.items()):
-    #                 print(f"  {date}: {value}")
-    #     except KeyError as e:
-    #         print("Error processing JSON response:", e)

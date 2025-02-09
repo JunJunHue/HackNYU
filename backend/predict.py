@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 import google.generativeai as genai  # ✅ Google Gemini AI
 
 # ✅ Load Google Gemini API Key (Ensure this is securely stored)
-genai.configure(api_key="AIzaSyDouyI4CVYvKk-RS33daEmGggFycVJ6fzQ")
+genai.configure(api_key="YOUR GEMINI API KEY")
 
 # ✅ Initialize Flask App
 app = Flask(__name__)

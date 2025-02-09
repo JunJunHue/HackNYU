@@ -142,3 +142,80 @@ button.dashboard-search-button:hover {
 .explanation-text {
     color: white;
 }
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: white;
+    color: #2e7d32;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.back-button:hover {
+    background-color: #e0e0e0;
+}
+
+  .loading-text {
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  button {
+    color: white;
+    background-color: #10B981;
+    --ring-color: #6EE7B7;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    line-height: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    text-align: center;
+    margin-right: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    border: none;
+  }
+  
+  button:hover {
+    background-color: #059669;
+  }
+  
+  button:focus {
+    box-shadow: 0 0 0 4px var(--ring-color);
+  }
+  
+  .loading-svg {
+    display: inline;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 0.75rem;
+    color: white;
+    animation: bounce 1s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(-5px);
+    }
+    50% {
+      transform: translateY(5px);
+    }
+  }

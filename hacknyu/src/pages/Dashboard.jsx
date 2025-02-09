@@ -1,27 +1,26 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [plants, setPlants] = useState([]);
   const [climate, setClimate] = useState([]);
   const [explanations, setExplanations] = useState({});
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
-  // 📝 Function to Summarize AI Explanation
   const summarizeExplanation = (explanation) => {
     if (!explanation || explanation.trim().length === 0) {
       return "No explanation available.";
     }
 
-    // Keep the first meaningful 2-3 sentences
     let sentences = explanation.split(". ").slice(0, 3).join(". ");
-    
-    // Ensure a clean end
     if (!sentences.endsWith(".")) sentences += ".";
-
     return sentences;
   };
 
@@ -30,9 +29,12 @@ const Dashboard = () => {
     setPlants([]);
     setClimate([]);
     setExplanations({});
+    setLoading(true);
+    setDataLoaded(false);
 
     if (!latitude || !longitude) {
       setError("Please enter valid latitude and longitude.");
+      setLoading(false);
       return;
     }
 
@@ -59,7 +61,6 @@ const Dashboard = () => {
         setError("No climate data available for this location.");
       }
 
-      // Fetch AI explanations
       if (plantList.length > 0 && climateData.length > 0) {
         console.log("Fetching AI explanations...");
         const explanationResponse = await axios.post(
@@ -71,7 +72,6 @@ const Dashboard = () => {
         if (explanationResponse.data && explanationResponse.data.explanations) {
           console.log("🌱 AI Explanations Received:", explanationResponse.data.explanations);
 
-          // Summarize explanations before storing
           const summarizedExplanations = {};
           Object.keys(explanationResponse.data.explanations).forEach((plant) => {
             summarizedExplanations[plant] = summarizeExplanation(explanationResponse.data.explanations[plant]);
@@ -82,10 +82,14 @@ const Dashboard = () => {
           console.error("❌ AI Explanation Error: No explanations found.");
         }
       }
+
+      setDataLoaded(true);
     } catch (error) {
       console.error("Error fetching data:", error);
       setError("Failed to fetch data. Please check your connection and try again.");
     }
+
+    setLoading(false);
   };
 
   const formatClimateData = (climate) => {
@@ -120,6 +124,11 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
+      {/* 🔙 Back Button to Home at the Top Left */}
+      <button className="back-button" onClick={() => navigate("/")}>
+        ⬅️ Back to Home
+      </button>
+
       <h1>🌿 Find the Best Plants & Climate for Your Location</h1>
 
       <div className="search-section">
@@ -135,14 +144,23 @@ const Dashboard = () => {
           value={longitude}
           onChange={(e) => setLongitude(e.target.value)}
         />
-        <button className="dashboard-search-button" onClick={fetchData}>
-          SEARCH
+        <button className="dashboard-search-button" onClick={fetchData} disabled={loading}>
+          {loading ? (
+            <>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 101" className="loading-svg">
+                <circle fill="#ffff" r="45" cy="50" cx="50"></circle>
+              </svg>
+              Loading...
+            </>
+          ) : (
+            "SEARCH"
+          )}
         </button>
       </div>
 
       {error && <p className="error-message">{error}</p>}
 
-      {plants.length > 0 && (
+      {dataLoaded && plants.length > 0 && (
         <div className="results-section">
           <h2>🌱 Recommended Plants:</h2>
           <div className="plant-list">
@@ -160,7 +178,7 @@ const Dashboard = () => {
         </div>
       )}
 
-      {climate.length > 0 && (
+      {dataLoaded && climate.length > 0 && (
         <div className="results-section">
           <h2>🌤 Climate Factors:</h2>
           <div className="climate-list">
